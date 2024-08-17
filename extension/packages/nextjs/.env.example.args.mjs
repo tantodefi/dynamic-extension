@@ -1,0 +1,1 @@
+export const additionalVars = "NEXT_PUBLIC_DYNAMIC_API_KEY=";
