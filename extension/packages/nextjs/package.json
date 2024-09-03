@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "@usecapsule/react-sdk": "3.19.0"
+    "@dynamic-labs/ethereum": "^2.3.10",
+    "@dynamic-labs/sdk-react-core": "^2.3.10",
+    "@dynamic-labs/wagmi-connector": "^2.3.10"
   }
 }
