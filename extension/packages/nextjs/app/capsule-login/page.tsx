@@ -1,15 +1,21 @@
 "use client";
 
+import React, { useState } from "react";
 import Link from "next/link";
-import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
-import { DynamicWagmiConnector } from "@dynamic-labs/wagmi-connector";
+import Capsule, { CapsuleModal, Environment } from "@usecapsule/react-sdk";
+// Import styles if using v3.5.0 or greater of `@usecapsule/react-sdk`
+import "@usecapsule/react-sdk/styles.css";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Address } from "~~/components/scaffold-eth";
 
-const Dynamiclogin: NextPage = () => {
+// Initialize Capsule SDK with your API key and environment
+const capsule = new Capsule(Environment.BETA, process.env.NEXT_PUBLIC_CAPSULE_API_KEY);
+
+const Capsulelogin: NextPage = () => {
   const { address: connectedAddress } = useAccount();
+  const [isOpen, setIsOpen] = useState(false); // Use any state management you wish, this is purely an example!
 
   return (
     <>
@@ -17,12 +23,16 @@ const Dynamiclogin: NextPage = () => {
         <div className="px-5">
           <h1 className="text-center">
             <span className="block text-2xl mb-2">Welcome to</span>
-            <span className="block text-4xl font-bold">Scaffold-ETH 2 with Dynamic.xyz</span>
+            <span className="block text-4xl font-bold">Scaffold-ETH 2 with Capsule</span>
           </h1>
           <div className="flex justify-center">
-          <DynamicWagmiConnector>
-            <DynamicWidget />
-          </DynamicWagmiConnector>
+            <div>
+              <button className="btn" onClick={() => setIsOpen(true)}>
+                Sign in With Email
+              </button>
+
+              <CapsuleModal capsule={capsule} isOpen={isOpen} onClose={() => setIsOpen(false)} />
+            </div>
           </div>
           <div className="flex justify-center items-center space-x-2">
             <p className="my-2 font-medium">Connected Address:</p>
@@ -36,32 +46,36 @@ const Dynamiclogin: NextPage = () => {
           </p>
           <p className="text-center text-lg">
             Make sure you delete the{" "}
-              <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-                "RainbowKitCustomConnectButton" and the "FaucetButton" components
-              </code> 
-              {" "}there
-            </p>
-          <p className="text-center text-lg">
-            Copy how the DynamicWidget is implemented in{" "}
             <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/nextjs/app/dynamic-login/page.tsx
+              "RainbowKitCustomConnectButton" and the "FaucetButton" components
             </code>{" "}
-            {" "}into the{" "}
+            there
+          </p>
+          <p className="text-center text-lg">
+            Copy how the CapsuleModal is implemented in{" "}
+            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
+              packages/nextjs/app/capsule-login/page.tsx
+            </code>{" "}
+            into the{" "}
             <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
               packages/nextjs/components/Header.tsx
             </code>{" "}
-            {" "}file
+            file
           </p>
           <p className="text-center text-lg">
-            Remember to get your own <a href="https://app.dynamic.xyz/" className="underline bold">Dynamic API key from their dashboard</a> and input into{" "}
+            Remember to get your own{" "}
+            <a href="https://developer.usecapsule.com/" className="underline bold">
+              Capsule API key from their dashboard
+            </a>{" "}
+            and input into{" "}
             <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/nextjs/components/DynamicSCaffoldProvider.tsx
+              packages/nextjs/app/capsule-login/page.tsx
             </code>{" "}
-            {" "}using the NEXT_PUBLIC_DYNAMIC_API_KEY variable in your{" "}
+            using the NEXT_PUBLIC_CAPSULE_API_KEY variable in your{" "}
             <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
               .env.local
             </code>{" "}
-            {" "}file
+            file
           </p>
         </div>
 
@@ -94,4 +108,4 @@ const Dynamiclogin: NextPage = () => {
   );
 };
 
-export default Dynamiclogin;
+export default Capsulelogin;

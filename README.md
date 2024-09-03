@@ -1,6 +1,6 @@
 # Dynamic extension
 
-![alt text](./dynamic-extension.png)
+![alt text](./capsule.jpeg)
 
 This Scaffold-ETH 2 extension comes pre-configured with [Dynamic.xyz](https://dynamic.xyz/), providing an example to help you get started quickly. Follow the steps below to set up and start using the extension.
 
