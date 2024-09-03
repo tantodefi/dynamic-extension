@@ -9,7 +9,7 @@ This Scaffold-ETH 2 extension comes pre-configured with [Dynamic.xyz](https://dy
 1. Create a new project with Dynamic extension:
 
 ```bash
-npx create-eth@latest -e @tantodefi/dynamic-extension
+npx create-eth@latest -e tantodefi/dynamic-extension
 ```
 
 2. Configure environment variables:
